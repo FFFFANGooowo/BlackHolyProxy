@@ -1,10 +1,14 @@
-# X.AI/OpenAI 兼容 API 代理（Deno Deploy 专用）
+# X.AI/OpenAI 兼容 API 代理
 
-本项目为 X.AI（兼容 OpenAI 格式）API 的无依赖透传代理，**仅供 [Deno Deploy](https://deploy.deno.com) 云端部署使用**。不建议本地或其他平台运行。
+本项目为 X.AI（兼容 OpenAI 格式）API 的无依赖透传代理，支持云端 Deno Deploy 和本地 Deno 两种部署方式。请根据你的需求选择对应的文件和流程。
 
 ---
 
-## 部署流程
+## 云端部署（推荐，适合中国大陆/全球）
+
+使用 `xai_proxy.ts`，专为 [Deno Deploy](https://deploy.deno.com) 云端部署设计。
+
+### 云端部署流程
 
 1. **Fork 本项目**  
    点击右上角 Fork，将本项目复制到你的 GitHub 账户下。
@@ -23,6 +27,29 @@
 
 6. **（可选）设置环境变量**  
    如需全局 API Key，可在 Deno Deploy 项目设置中添加 `XAI_API_KEY` 环境变量。
+
+---
+
+## 如果你想本地部署
+
+使用 `xai_proxy_local.ts`，专为本地 Deno 服务器环境设计。
+
+### 本地部署流程
+
+1. **克隆本项目到本地**  
+   ```bash
+   git clone https://github.com/FFFFANGooowo/BlackHolyProxy.git
+   cd BlackHolyProxy
+   ```
+
+2. **运行本地代理服务**  
+   ```bash
+   deno run --allow-net --allow-env xai_proxy_local.ts
+   ```
+   服务将监听在 `http://0.0.0.0:8000`。
+
+3. **（可选）设置环境变量**  
+   可通过设置 `XAI_API_KEY` 环境变量实现全局 API Key。
 
 ---
 
