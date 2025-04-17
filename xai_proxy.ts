@@ -64,8 +64,12 @@ async function handler(req: Request): Promise<Response> {
       });
     }
 
-    // 只代理 /chat/completions 路径，其他路径可按需扩展
-    const targetUrl = new URL(`${XAI_API_BASE}${url.pathname}${url.search}`);
+    // 修正路径拼接，避免重复 /v1 前缀
+    let apiPath = url.pathname;
+    if (apiPath.startsWith("/v1/")) {
+      apiPath = apiPath.substring(3); // 去掉第一个 /v1
+    }
+    const targetUrl = new URL(`${XAI_API_BASE}${apiPath}${url.search}`);
 
     // Prepare headers to forward
     const forwardHeaders = new Headers(req.headers);
